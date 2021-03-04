@@ -1,0 +1,140 @@
+﻿@model WebEF.Dtos.DireccionDto
+@using WebEF.Models.Enums
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Direccion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StringDireccion" class="control-label"></label>
+                <input asp-for="StringDireccion" class="form-control" />
+                <span asp-validation-for="StringDireccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoDireccion" class="control-label"></label>
+                <select asp-for="TipoDireccion" class="form-control" asp-items="Html.GetEnumSelectList<TipoDireccion>()"></select>
+                <span asp-validation-for="TipoDireccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a data-toggle="modal" data-target="#myModal" href="#">
+                    <i class="fa fa-map-marker fa-fw"></i> ubicación
+                </a>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitud" class="control-label"></label>
+                <input asp-for="Latitud" class="form-control" />
+                <span asp-validation-for="Latitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitud" class="control-label"></label>
+                <input asp-for="Longitud" class="form-control" />
+                <span asp-validation-for="Longitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActorId" class="control-label"></label>
+                <select asp-for="ActorId" class="form-control" asp-items="ViewBag.ActorId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="Col100">
+    <style>
+        .pac-container {
+            z-index: 99999;
+        }
+    </style>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModal-label">Ubicacion</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">Direccion</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="direccionUbicacion" placeholder="Direccion" />
+                            </div>
+                        </div>
+                        <div id="ModalMapPreview" name="ModalMapPreview" style="width: 100%; height: 700px;"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-horizontal form-group-sm">
+                        <label class="col-sm-2 control-label ">Latitud</label>
+                        <div class="col-sm-3">
+                            <input id="latitudUbicacion" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label ">Longitud</label>
+                        <div class="col-sm-3">
+                            <input id="longitudUbicacion" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-locationpicker/0.1.12/locationpicker.jquery.js"
+            integrity="sha512-AR9dz+gbmrsSrWyaGDdUeS5z1kCejMjYbdQeHHdqrdOdyzs8x4LuDkLIjT1x34G71PS9o9RONhk24tN+sDYiYg=="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" 
+            src='https://maps.google.com/maps/api/js?key=AIzaSyB8EVdFSaEeVrINAG2TjGx8ZXlb8zFv5as&sensor=false&libraries=places'></script>
+    <script type="text/javascript">
+        $("#ModalMapPreview").locationpicker({
+            location: {
+                latitude: 34.001869735409315,
+                longitude: -118.48786465828975
+            },
+            radius: 0,
+            enableAutocomplete: true,
+            inputBinding: {
+                latitudeInput: $("#latitudUbicacion"),
+                longitudeInput: $("#longitudUbicacion"),
+                locationNameInput: $("#direccionUbicacion"),
+                
+            },
+            onchanged: function (currentLocation, radius, isMarkerDrooped) {
+                //alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
+                //var addressComponents = $(this).locationpicker('map').location.addressComponents;
+                //alert(addressComponents.city);
+                $("#StringDireccion").val($("#direccionUbicacion").val());
+                $("#Latitud").val($("#latitudUbicacion").val());
+                $("#Longitud").val($("#longitudUbicacion").val());
+            },
+            oninitialized: function (component) {
+                //var addressComponents = $(component).locationpicker('map').location.addressComponents;
+                //alert(addressComponents.city);
+            }
+        });
+
+    </script>           
+}

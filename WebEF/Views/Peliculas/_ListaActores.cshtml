@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebEF.Models.ActorPelicula>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("Actores")
+                @*@Html.DisplayNameFor(model => model.Actor.Id)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Actor.Nombres)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Actor.Apellidos)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Actor.UrlFoto)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Actor.FechaNacimiento)*@
+            </th>
+            <th>
+                @*k@Html.DisplayNameFor(model => model.Actor.Genero)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Actor.EstaBorrado)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Actor.Id)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Actor.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actor.Apellidos)
+            </td>
+            @*<td>
+                @if (!string.IsNullOrEmpty(item.Actor.UrlFoto))
+                {
+                    <img src="@Url.Content(item.Actor.UrlFoto)" alt="Imagen" style="width:100px; height:100px; max-width:100%; height:auto" />
+                }
+                else
+                {
+                    <img src="~/actores/Default.png" alt="Imagen" style="width:100px; height:100px; max-width:100%; height:auto" />
+                }
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Actor.UrlFoto)
+            </td>*@
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Actor.FechaNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Actor.Genero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Actor.EstaBorrado)
+        </td>*@
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

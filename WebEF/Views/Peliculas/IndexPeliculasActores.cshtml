@@ -1,0 +1,75 @@
+﻿@model IEnumerable<WebEF.Models.Pelicula>
+@using System.Linq;
+
+@{
+    ViewData["Title"] = "IndexPeliculasActores";
+}
+
+<h1>IndexPeliculasActores</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@foreach (var item in Model)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UrlFoto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaEstreno)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstaCartelera)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrecioTicket)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.UrlFoto))
+                    {
+                        <img src="@Url.Content(item.UrlFoto)" alt="Imagen" style="width:100px; height:100px; max-width:100%; height:auto" />
+                    }
+                    else
+                    {
+                        <img src="~/actores/Default.png" alt="Imagen" style="width:100px; height:100px; max-width:100%; height:auto" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaEstreno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstaCartelera)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioTicket)
+                </td>
+                <td>
+            </tr>
+            <tr>
+                @await Html.PartialAsync("_ListaActores", item.ActoresPeliculas)
+            </tr>
+            
+        </tbody>
+    </table>
+}

@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "defaultProvider": "filesystem",
+  "libraries": [
+    {
+      "library": "D:\\david.restrepo\\Desktop\\jquery-locationpicker-plugin-master",
+      "destination": "wwwroot/lib/jquery-locationpicker-plugin-master/",
+      "files": [
+        ".gitignore",
+        "bower.json",
+        "Gruntfile.js",
+        "LICENSE",
+        "locationpicker.jquery.json",
+        "package.json",
+        "README.md"
+      ]
+    }
+  ]
+}
