@@ -7,6 +7,7 @@
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
+        La jerarquía visual general de la aplicación se define aquí, junto con la navegación.
     
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
@@ -29,6 +30,7 @@
 
             <!--
             Default Styles for all Flyout Items
+            Estilos predeterminados para todos los elementos desplegables
             https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
@@ -56,6 +58,7 @@
 
             <!--
             Custom Style you can apply to any Flyout Item
+            Estilo personalizado que puede aplicar a cualquier elemento flotante
             -->
             <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -76,6 +79,8 @@
     <!-- 
         When the Flyout is visible this defines the content to display in the flyout.
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
+        Cuando el menú lateral está visible, esto define el contenido que se mostrará en el control flotante.
+        FlyoutDisplayOptions = "AsMultipleItems" creará un elemento flotante separado para cada elemento secundario
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="About" Icon="icon_about.png">
@@ -85,7 +90,10 @@
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
 
-    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
+    <!-- 
+        When the Flyout is visible this will be a menu item you can tie a click behavior to
+        Cuando el menú desplegable está visible, este será un elemento del menú al que puede vincular un comportamiento de clic
+    -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
 
@@ -94,6 +102,10 @@
         the flyout menu won't be available. This is useful for creating areas of the application where 
         you don't want users to be able to navigate away from. If you would like to navigate to this 
         content you can do so by calling 
+        TabBar le permite definir contenido que no aparecerá en un menú desplegable. Cuando este contenido está activo
+        el menú desplegable no estará disponible. Esto es útil para crear áreas de la aplicación donde
+        no desea que los usuarios puedan navegar fuera de. Si desea navegar a este
+        contenido, puede hacerlo llamando
         await Shell.Current.GoToAsync("//LoginPage");
     -->
     <TabBar>
