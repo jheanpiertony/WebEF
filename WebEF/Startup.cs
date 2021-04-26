@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 using WebEF.Data;
 using WebEF.Servicios;
 
@@ -16,9 +17,12 @@ namespace WebEF
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //var a = Environment.GetEnvironmentVariables();
+            DefaultConnection = Environment.GetEnvironmentVariable("defaultConnection");
         }
 
         public IConfiguration Configuration { get; }
+        public string DefaultConnection { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,7 +32,7 @@ namespace WebEF
             services.AddAutoMapper(typeof(WebEF.Helpers.AutoMapperProfiles));
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x => x.UseNetTopologySuite())
+                options.UseSqlServer(DefaultConnection, x => x.UseNetTopologySuite())
                 .EnableSensitiveDataLogging(true)
                     .UseLoggerFactory(LoggerFactory.Create(builder =>
                     {
